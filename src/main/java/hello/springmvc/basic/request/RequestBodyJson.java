@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletInputStream;
@@ -19,10 +18,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 @Controller
 public class RequestBodyJson {
-    static  final String json = "{username:hello,age:25}";
-    static  final String contentType = "application/json";
-
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
 
     @PostMapping("/request-body-json-v1")
@@ -49,7 +45,7 @@ public class RequestBodyJson {
 
     @ResponseBody
     @PostMapping("/request-body-json-v3")
-    public String requestBodyJsonV3(@RequestBody HelloData helloData) throws IOException {
+    public String requestBodyJsonV3(@RequestBody HelloData helloData){
         log.info("username:{} , age :{} ", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
